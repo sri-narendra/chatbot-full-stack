@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini AI Chat | Professional Interface</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gradient-to-br from-gray-900 via-gray-900 to-black text-white h-screen flex overflow-hidden">
+    <!-- Floating Particles Background -->
+    <div id="particles" class="particles-container"></div>
+
+    <!-- Collapsible Sidebar -->
+    <div id="sidebar" class="sidebar h-full bg-gray-900/80 backdrop-blur-xl border-r border-gray-800/50 flex flex-col flex-shrink-0">
+        <!-- Sidebar Header -->
+        <div class="p-4 border-b border-gray-800/50 flex items-center">
+            <button id="sidebarToggle" class="p-2 hover:bg-gray-800/50 rounded-xl transition-all duration-200">
+                <i class="fas fa-bars text-lg"></i>
+            </button>
+            <span id="sidebarTitle" class="ml-3 font-semibold text-gray-200">Chat History</span>
+        </div>
+
+        <!-- New Chat Button -->
+        <div class="p-3 sidebar-content">
+            <button onclick="newChat()"
+                class="w-full p-3 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl hover:shadow-lg transition-all duration-200 group">
+                <i class="fas fa-plus group-hover:rotate-90 transition-transform duration-300"></i>
+                <span class="font-medium">New Chat</span>
+            </button>
+        </div>
+
+        <!-- Chat Sessions List -->
+        <div id="sessions" class="flex-1 overflow-y-auto p-2 sidebar-content space-y-1">
+            <div class="text-gray-500 text-sm p-4 text-center">Loading chats...</div>
+        </div>
+
+        <!-- Settings & User Info -->
+        <div class="p-3 border-t border-gray-800/50 sidebar-content space-y-3">
+            <button onclick="showSettings()"
+                class="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-gray-800/50 transition-all duration-200 group">
+                <i class="fas fa-cog text-gray-400 group-hover:text-blue-400 transition-colors duration-200"></i>
+                <span class="text-sm font-medium">Settings</span>
+                <i class="fas fa-chevron-right text-xs text-gray-500 ml-auto"></i>
+            </button>
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-gray-800/30">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-user text-sm"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-sm font-semibold">Gemini User</div>
+                    <div id="apiStatus" class="text-xs text-gray-400 flex items-center gap-1">
+                        <div class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></div>
+                        <span>API: Checking...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Chat Area -->
+    <div id="chatArea" class="chat-area flex-1 flex flex-col h-full relative">
+        <!-- Chat Header with Integrated Status -->
+        <div class="h-16 border-b border-gray-800/50 bg-gray-900/50 backdrop-blur-sm flex items-center justify-between px-6 flex-shrink-0 relative">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="p-2 hover:bg-gray-800/50 rounded-xl lg:hidden transition-all duration-200">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="flex items-center gap-3">
+                    <h1 class="font-bold text-xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        Gemini AI
+                    </h1>
+                    <!-- Connection Status Badge -->
+                    <div id="connectionStatus" class="flex items-center gap-1.5 bg-gray-800/30 px-2 py-1 rounded-full text-xs connection-badge border border-gray-700/50">
+                        <div class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse status-dot"></div>
+                        <span class="hidden sm:inline">Connecting...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-1 header-buttons">
+                <button onclick="clearCurrentChat()"
+                    class="p-2.5 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all duration-200"
+                    title="Delete chat">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <button onclick="showSettings()"
+                    class="p-2.5 text-gray-400 hover:text-white hover:bg-gray-800/50 rounded-xl transition-all duration-200"
+                    title="Settings">
+                    <i class="fas fa-sliders-h"></i>
+                </button>
+                <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center ml-2 shadow-lg">
+                    <i class="fas fa-robot text-xs"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div id="chatBox" class="flex-1 overflow-y-auto p-4 md:p-8 relative">
+            <!-- Welcome Message -->
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center py-16">
+                    <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                        <i class="fas fa-robot text-4xl text-blue-400"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                        How can I help you today?
+                    </h2>
+                    <p class="text-gray-400 mb-8 max-w-lg mx-auto" id="welcomeMessage">
+                        I'm your AI assistant powered by multiple Gemini API keys for maximum reliability
+                    </p>
+                    
+                    <!-- Feature Cards -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl mx-auto">
+                        <div class="p-4 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-800/50">
+                            <i class="fas fa-microphone text-blue-400 mb-2"></i>
+                            <div class="text-sm font-medium">Voice Search</div>
+                        </div>
+                        <div class="p-4 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-800/50">
+                            <i class="fas fa-history text-purple-400 mb-2"></i>
+                            <div class="text-sm font-medium">Chat History</div>
+                        </div>
+                        <div class="p-4 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-800/50">
+                            <i class="fas fa-sliders-h text-green-400 mb-2"></i>
+                            <div class="text-sm font-medium">Customizable</div>
+                        </div>
+                        <div class="p-4 bg-gray-800/30 backdrop-blur-sm rounded-xl border border-gray-800/50">
+                            <i class="fas fa-bolt text-yellow-400 mb-2"></i>
+                            <div class="text-sm font-medium">Fast Responses</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Input -->
+        <div class="border-t border-gray-800/50 bg-gray-900/50 backdrop-blur-sm p-6 flex-shrink-0">
+            <div class="max-w-3xl mx-auto">
+                <div class="relative group">
+                    <textarea id="message" rows="1"
+                        class="w-full p-5 pr-28 bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl resize-none focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 text-white placeholder-gray-500 transition-all duration-200"
+                        placeholder="Ask me anything or click mic to speak..." oninput="autoResize(this)"
+                        onkeydown="handleKeyDown(event)"></textarea>
+
+                    <!-- Voice Search Button -->
+                    <button id="voiceBtn" onclick="toggleVoiceSearch()"
+                        class="absolute right-16 top-1/2 transform -translate-y-1/2 p-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 group"
+                        title="Voice Search">
+                        <i class="fas fa-microphone group-hover:scale-110 transition-transform duration-200"></i>
+                    </button>
+
+                    <!-- Send Button -->
+                    <button id="sendBtn" onclick="sendMessage()"
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 p-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 rounded-xl shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 group">
+                        <i class="fas fa-paper-plane group-hover:translate-x-1 transition-transform duration-200"></i>
+                    </button>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                    <div class="text-xs text-gray-500">
+                        Press <kbd class="px-2 py-1 bg-gray-800 rounded-md mx-1">Enter</kbd> to send • 
+                        <kbd class="px-2 py-1 bg-gray-800 rounded-md mx-1">Shift+Enter</kbd> for new line
+                    </div>
+                    <div id="responseLengthInfo" class="text-xs font-medium bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"></div>
+                </div>
+                <!-- Voice Status -->
+                <div id="voiceStatus" class="text-xs text-center mt-3 hidden">
+                    <span id="voiceStatusText" class="text-purple-300"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 settings-modal hidden items-center justify-center z-50 p-4">
+        <div class="bg-gray-900/95 backdrop-blur-xl rounded-2xl p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto border border-gray-800/50 shadow-2xl">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Settings</h3>
+                    <p class="text-gray-400 text-sm mt-1">Customize your chat experience</p>
+                </div>
+                <button onclick="hideSettings()" class="p-2 hover:bg-gray-800/50 rounded-xl transition-all duration-200">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Response Length Control -->
+                <div class="glass-card p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <label class="font-semibold text-lg">Response Length</label>
+                            <p class="text-sm text-gray-400 mt-1">Control the AI response size</p>
+                        </div>
+                        <span id="maxTokensValue" class="text-blue-400 font-semibold">2000 tokens</span>
+                    </div>
+                    <input type="range" id="maxTokensSlider" min="100" max="8192" step="100" value="2000"
+                        class="w-full h-2 bg-gray-800 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gradient-to-r [&::-webkit-slider-thumb]:from-blue-500 [&::-webkit-slider-thumb]:to-purple-500"
+                        oninput="updateMaxTokensValue(this.value)">
+                    <div class="flex justify-between text-xs text-gray-500 mt-3">
+                        <span class="text-green-400">Short (100)</span>
+                        <span class="text-blue-400">Medium (2000)</span>
+                        <span class="text-purple-400">Long (8192)</span>
+                    </div>
+                </div>
+
+                <!-- History Context -->
+                <div class="glass-card p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <label class="font-semibold text-lg">History Context</label>
+                            <p class="text-sm text-gray-400 mt-1">Number of previous messages to remember</p>
+                        </div>
+                        <span id="historyMessagesValue" class="text-purple-400 font-semibold">5 messages</span>
+                    </div>
+                    <input type="range" id="historyMessagesSlider" min="1" max="20" step="1" value="5"
+                        class="w-full h-2 bg-gray-800 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gradient-to-r [&::-webkit-slider-thumb]:from-purple-500 [&::-webkit-slider-thumb]:to-pink-500"
+                        oninput="updateHistoryMessagesValue(this.value)">
+                    <div class="flex justify-between text-xs text-gray-500 mt-3">
+                        <span class="text-gray-400">Min (1)</span>
+                        <span class="text-purple-400">Default (5)</span>
+                        <span class="text-pink-400">Max (20)</span>
+                    </div>
+                </div>
+
+                <!-- Temperature Control -->
+                <div class="glass-card p-5">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <label class="font-semibold text-lg">Creativity Level</label>
+                            <p class="text-sm text-gray-400 mt-1">Balance between precise and creative responses</p>
+                        </div>
+                        <span id="temperatureValue" class="text-yellow-400 font-semibold">0.7</span>
+                    </div>
+                    <input type="range" id="temperatureSlider" min="0" max="1" step="0.1" value="0.7"
+                        class="w-full h-2 bg-gray-800 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gradient-to-r [&::-webkit-slider-thumb]:from-yellow-500 [&::-webkit-slider-thumb]:to-orange-500"
+                        oninput="updateTemperatureValue(this.value)">
+                    <div class="flex justify-between text-xs text-gray-500 mt-3">
+                        <span class="text-blue-400">Precise (0)</span>
+                        <span class="text-yellow-400">Balanced (0.7)</span>
+                        <span class="text-orange-400">Creative (1)</span>
+                    </div>
+                </div>
+
+                <!-- Voice Settings -->
+                <div class="glass-card p-5">
+                    <h4 class="font-semibold text-lg mb-4">Voice Settings</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <label class="text-sm font-medium">Recognition Language</label>
+                                <p class="text-xs text-gray-400">Select your preferred language</p>
+                            </div>
+                            <select id="voiceLanguage" class="bg-gray-800/50 border border-gray-700/50 text-white rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500">
+                                <option value="en-US">🇺🇸 English (US)</option>
+                                <option value="en-GB">🇬🇧 English (UK)</option>
+                                <option value="es-ES">🇪🇸 Spanish</option>
+                                <option value="fr-FR">🇫🇷 French</option>
+                                <option value="de-DE">🇩🇪 German</option>
+                                <option value="hi-IN">🇮🇳 Hindi</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-sm font-medium">Continuous Listening</span>
+                                <p class="text-xs text-gray-400">Keep microphone active</p>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="continuousListening" class="sr-only peer">
+                                <div class="w-12 h-6 bg-gray-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-6 peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-purple-600 peer-checked:to-pink-600"></div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Status -->
+                <div class="glass-card p-5">
+                    <h4 class="font-semibold text-lg mb-4">API Status</h4>
+                    <div id="apiStatusDetails" class="text-sm">
+                        Loading API status...
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-3 pt-4">
+                    <button onclick="resetSettings()"
+                        class="flex-1 p-4 border border-gray-700/50 hover:bg-gray-800/50 rounded-xl font-medium transition-all duration-200">
+                        Reset Defaults
+                    </button>
+                    <button onclick="saveSettings()"
+                        class="flex-1 p-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200">
+                        Save Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-gray-900/95 backdrop-blur-xl rounded-2xl p-8 max-w-md w-full border border-gray-800/50 shadow-2xl">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-14 h-14 bg-gradient-to-br from-red-900/30 to-red-800/30 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                    <i class="fas fa-exclamation-triangle text-2xl text-red-400"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-xl">Delete Chat?</h3>
+                    <p class="text-gray-400 text-sm mt-1">This action cannot be undone</p>
+                </div>
+            </div>
+            <p class="text-gray-300 mb-8 p-4 bg-gray-800/30 rounded-xl" id="deleteModalText">
+                Are you sure you want to delete this chat? All messages will be permanently removed.
+            </p>
+            <div class="flex gap-3">
+                <button onclick="hideDeleteModal()"
+                    class="flex-1 p-4 border border-gray-700/50 hover:bg-gray-800/50 rounded-xl font-medium transition-all duration-200">
+                    Cancel
+                </button>
+                <button onclick="confirmDelete()"
+                    class="flex-1 p-4 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 rounded-xl font-medium shadow-lg transition-all duration-200">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Visualization -->
+    <div id="voiceVisualizer" class="fixed inset-0 bg-black/80 backdrop-blur-lg hidden items-center justify-center z-50 p-4">
+        <div class="bg-gray-900/95 backdrop-blur-xl rounded-2xl p-8 max-w-md w-full border border-gray-800/50 shadow-2xl">
+            <div class="text-center mb-8">
+                <div class="w-28 h-28 mx-auto mb-6 relative">
+                    <div id="voiceWave" class="voice-wave"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <i class="fas fa-microphone text-4xl text-purple-400"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-2 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Listening...
+                </h3>
+                <p id="voiceInstruction" class="text-gray-400">Speak clearly. Press Escape to cancel.</p>
+            </div>
+            <div id="voiceTranscript" class="min-h-32 p-5 bg-gray-800/50 backdrop-blur-sm rounded-xl mb-6 text-left overflow-y-auto max-h-48">
+                <p class="text-gray-300">Speak your message...</p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="stopVoiceSearch()"
+                    class="flex-1 p-4 bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 rounded-xl font-medium shadow-lg transition-all duration-200">
+                    <i class="fas fa-stop mr-2"></i>Stop
+                </button>
+                <button onclick="sendVoiceMessage()"
+                    class="flex-1 p-4 bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 rounded-xl font-medium shadow-lg transition-all duration-200">
+                    <i class="fas fa-paper-plane mr-2"></i>Send
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'status-pulse': 'status-pulse 2s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        'status-pulse': {
+                            '0%': { transform: 'scale(1)', opacity: '0.8' },
+                            '70%': { transform: 'scale(1.5)', opacity: '0' },
+                            '100%': { transform: 'scale(1.5)', opacity: '0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Include JavaScript -->
+    <script src="variables.js"></script>
+    <script src="utils.js"></script>
+    <script src="voice.js"></script>
+    <script src="messages.js"></script>
+    <script src="settings.js"></script>
+    <script src="delete.js"></script>
+    <script src="api.js"></script>
+    <script src="chat.js"></script>
+    <script src="style.js"></script>
+    <script src="init.js"></script>
+</body>
+
+</html>
