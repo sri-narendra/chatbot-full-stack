@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } else {
         chatBox.innerHTML = '';
-        addMessage('assistant', '⚠️ Cannot connect to server. Make sure backend is running on http://localhost:5000', 'error');
+        addMessage('assistant', '⚠️ Cannot connect to server. Make sure backend is running on https://chatbot-full-stack.onrender.com', 'error');
     }
 
     // Focus input

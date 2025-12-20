@@ -36,6 +36,4 @@ const voiceStatusText = document.getElementById('voiceStatusText');
 const voiceTranscriptEl = document.getElementById('voiceTranscript');
 const voiceWave = document.getElementById('voiceWave');
 const voiceInstruction = document.getElementById('voiceInstruction');
-
 const voiceBtn = document.getElementById('voiceBtn');
-

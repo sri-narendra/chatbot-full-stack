@@ -18,7 +18,7 @@ function updateConnectionStatus(connected) {
 
 async function testConnection() {
     try {
-        const response = await fetch('http://localhost:5000/health');
+        const response = await fetch('https://chatbot-full-stack.onrender.com/health');
         if (response.ok) {
             updateConnectionStatus(true);
             await checkApiStatus();
