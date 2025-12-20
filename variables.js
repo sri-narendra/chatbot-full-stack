@@ -1,5 +1,5 @@
 // Configuration
-const API_BASE = 'http://localhost:5000/api/chat';
+const API_BASE = 'https://chatbot-full-stack.onrender.com';
 let sessionId = localStorage.getItem('sessionId');
 let isSending = false;
 let apiStatus = 'checking';
@@ -36,4 +36,5 @@ const voiceStatusText = document.getElementById('voiceStatusText');
 const voiceTranscriptEl = document.getElementById('voiceTranscript');
 const voiceWave = document.getElementById('voiceWave');
 const voiceInstruction = document.getElementById('voiceInstruction');
+
 const voiceBtn = document.getElementById('voiceBtn');
