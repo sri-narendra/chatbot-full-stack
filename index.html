@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini AI Chat | Professional AI Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-bg {
+            background: var(--primary-gradient);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(30, 41, 59, 0.9);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-900 to-black text-white min-h-screen">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 px-6 py-4 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <span class="text-xl font-bold gradient-text">Gemini AI</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#features" class="text-gray-300 hover:text-white transition">Features</a>
+                <a href="#interface" class="text-gray-300 hover:text-white transition">Interface</a>
+                <a href="#demo" class="text-gray-300 hover:text-white transition">Get Started</a>
+            </div>
+            
+            <a href="login.html" class="btn-primary px-6 py-2 rounded-xl font-medium">
+                Login
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <!-- Floating elements -->
+            <div class="floating absolute -top-10 -left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"></div>
+            <div class="floating absolute top-1/2 -right-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+            
+            <div class="text-center relative z-10 fade-in">
+                <div class="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full mb-8">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    <span class="text-sm">Powered by Advanced AI Technology</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                    <span class="gradient-text">Professional</span> AI Chat Interface
+                </h1>
+                
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-10">
+                    A sleek, feature-rich chat interface with voice search, chat history, 
+                    and customizable settings for an enhanced AI experience.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#demo" 
+                       class="btn-secondary px-8 py-4 rounded-xl font-medium text-lg flex items-center justify-center gap-3">
+                        <i class="fas fa-play-circle"></i>
+                        View Demo
+                    </a>
+                </div>
+                
+                <!-- Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 max-w-4xl mx-auto">
+                    <div class="glass-card p-6">
+                        <div class="text-3xl font-bold gradient-text">Voice</div>
+                        <div class="text-gray-400 text-sm">Search Enabled</div>
+                    </div>
+                    <div class="glass-card p-6">
+                        <div class="text-3xl font-bold gradient-text">Chat</div>
+                        <div class="text-gray-400 text-sm">History Storage</div>
+                    </div>
+                    <div class="glass-card p-6">
+                        <div class="text-3xl font-bold gradient-text">Custom</div>
+                        <div class="text-gray-400 text-sm">Settings</div>
+                    </div>
+                    <div class="glass-card p-6">
+                        <div class="text-3xl font-bold gradient-text">Real-time</div>
+                        <div class="text-gray-400 text-sm">Responses</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6 bg-gray-900/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold mb-4">Powerful <span class="gradient-text">Features</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Everything you need for a premium AI chat experience</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-card p-8 fade-in">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-microphone text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Voice Search</h3>
+                    <p class="text-gray-400">Speak your queries naturally with real-time voice recognition and transcription.</p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Multiple language support
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Continuous listening mode
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="glass-card p-8 fade-in">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-history text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Chat History</h3>
+                    <p class="text-gray-400">Access your complete conversation history with intelligent session management.</p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Persistent storage
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Session organization
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="glass-card p-8 fade-in">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-sliders-h text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Customizable Settings</h3>
+                    <p class="text-gray-400">Fine-tune your AI experience with extensive customization options.</p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Response length control
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Creativity level adjustment
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="glass-card p-8 fade-in">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-comments text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Conversations</h3>
+                    <p class="text-gray-400">Intelligent context-aware conversations that remember your history.</p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Context memory
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Personalized responses
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="glass-card p-8 fade-in">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-bolt text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Fast Responses</h3>
+                    <p class="text-gray-400">Optimized for speed with real-time streaming and minimal latency.</p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Real-time streaming
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Optimized performance
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="glass-card p-8 fade-in">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Responsive Design</h3>
+                    <p class="text-gray-400">Beautiful interface that works perfectly on all devices and screen sizes.</p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Mobile optimized
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-300">
+                            <i class="fas fa-check text-green-400"></i>
+                            Tablet friendly
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interface Preview -->
+    <section id="interface" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold mb-4">Sleek <span class="gradient-text">Interface</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Modern, intuitive design with professional aesthetics</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <div class="glass-card p-2 relative">
+                        <!-- Mock chat interface -->
+                        <div class="bg-gray-900 rounded-xl p-4">
+                            <!-- Chat header -->
+                            <div class="flex items-center justify-between p-4 border-b border-gray-800">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 gradient-bg rounded-lg"></div>
+                                    <div>
+                                        <div class="font-bold">Gemini AI Assistant</div>
+                                        <div class="text-xs text-green-400">Online</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Chat messages -->
+                            <div class="p-4 space-y-4 h-64 overflow-y-auto">
+                                <div class="flex gap-3">
+                                    <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                    <div class="bg-gray-800 rounded-2xl p-3 max-w-xs">
+                                        How can I help you today?
+                                    </div>
+                                </div>
+                                
+                                <div class="flex gap-3 justify-end">
+                                    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-3 max-w-xs">
+                                        Explain quantum computing in simple terms
+                                    </div>
+                                    <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                </div>
+                                
+                                <div class="flex gap-3">
+                                    <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+                                    <div class="bg-gray-800 rounded-2xl p-3 max-w-xs">
+                                        Quantum computing uses quantum bits that can exist in multiple states simultaneously...
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Input area -->
+                            <div class="p-4 border-t border-gray-800">
+                                <div class="flex gap-2">
+                                    <div class="flex-1 bg-gray-800 rounded-xl p-3"></div>
+                                    <button class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <h3 class="text-3xl font-bold mb-6">Designed for <span class="gradient-text">Productivity</span></h3>
+                    <p class="text-gray-400 mb-6">
+                        Our interface combines aesthetic appeal with functional design, providing an intuitive
+                        experience that gets out of your way while you work.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-columns"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Split-Pane Layout</h4>
+                                <p class="text-gray-400">Sidebar chat history with main chat area for optimal workflow.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Visual Feedback</h4>
+                                <p class="text-gray-400">Real-time animations and status indicators for all interactions.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-expand-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-2">Responsive Design</h4>
+                                <p class="text-gray-400">Perfect experience on mobile, tablet, and desktop devices.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold mb-4">Ready to <span class="gradient-text">Get Started?</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto mb-10">
+                    Experience the power of professional AI chat interface. 
+                    View the demo or get started with the full experience.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="#interface" 
+                       class="btn-secondary px-10 py-5 rounded-xl font-bold text-xl flex items-center justify-center gap-4">
+                        <i class="fas fa-desktop"></i>
+                        View Demo
+                    </a>
+                    
+                    <a href="login.html" 
+                       class="btn-primary px-10 py-5 rounded-xl font-bold text-xl flex items-center justify-center gap-4">
+                        <i class="fas fa-rocket"></i>
+                        Get Started
+                    </a>
+                </div>
+                
+                <div class="mt-10 inline-flex items-center gap-3 text-gray-400">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure • Fast • User-Friendly</span>
+                </div>
+            </div>
+            
+            <!-- Quick Features Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-20">
+                <div class="text-center p-4">
+                    <i class="fas fa-microphone text-2xl text-blue-400 mb-2"></i>
+                    <div class="text-sm">Voice</div>
+                </div>
+                <div class="text-center p-4">
+                    <i class="fas fa-history text-2xl text-purple-400 mb-2"></i>
+                    <div class="text-sm">History</div>
+                </div>
+                <div class="text-center p-4">
+                    <i class="fas fa-sliders-h text-2xl text-green-400 mb-2"></i>
+                    <div class="text-sm">Settings</div>
+                </div>
+                <div class="text-center p-4">
+                    <i class="fas fa-comments text-2xl text-yellow-400 mb-2"></i>
+                    <div class="text-sm">Smart Chat</div>
+                </div>
+                <div class="text-center p-4">
+                    <i class="fas fa-mobile-alt text-2xl text-pink-400 mb-2"></i>
+                    <div class="text-sm">Responsive</div>
+                </div>
+                <div class="text-center p-4">
+                    <i class="fas fa-bolt text-2xl text-cyan-400 mb-2"></i>
+                    <div class="text-sm">Fast</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-800/50 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <span class="text-xl font-bold gradient-text">Gemini AI Chat</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Professional AI chat interface with voice search, 
+                        chat history, and customizable settings.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Quick Links</h4>
+                    <div class="space-y-3">
+                        <a href="#features" class="block text-gray-400 hover:text-white transition">Features</a>
+                        <a href="#interface" class="block text-gray-400 hover:text-white transition">Interface</a>
+                        <a href="#demo" class="block text-gray-400 hover:text-white transition">Get Started</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Get Access</h4>
+                    <div class="space-y-3">
+                        <div class="text-gray-400">Login to access the full chat interface</div>
+                        <a href="login.html" class="btn-primary inline-block px-6 py-3 rounded-xl font-medium">
+                            Login Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800/30 text-center text-gray-500 text-sm">
+                <p>© 2024 Gemini AI Chat Interface. All rights reserved.</p>
+                <p class="mt-2">Built with ❤️ using advanced AI technology</p>
+            </div>
+        </div>
+        
+        <!-- Made by Sri link -->
+        <a href="mailto:srinarendraofficial@gmail.com"
+           class="absolute bottom-1 right-1 text-[#9CA3AF] text-xs opacity-30 hover:opacity-100 transition-opacity">
+            MADE BY SRI
+        </a>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 gradient-bg rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl transition opacity-0">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('opacity-0');
+                backToTop.classList.add('opacity-100');
+            } else {
+                backToTop.classList.remove('opacity-100');
+                backToTop.classList.add('opacity-0');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all elements with fade-in class
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
