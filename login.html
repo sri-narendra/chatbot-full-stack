@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini Chat - Login</title>
+    <title>Buddy Chat - Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,38 +12,38 @@
         * {
             transition: all 0.3s ease;
         }
-        
+
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        
+
         .form-container {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .form-input {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
+
         .form-input:focus {
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.4);
         }
-        
+
         .toggle-option {
             cursor: pointer;
             padding: 10px 20px;
             border-radius: 8px;
             transition: all 0.3s ease;
         }
-        
+
         .toggle-option.active {
             background: rgba(255, 255, 255, 0.2);
         }
-        
+
         #toast {
             position: fixed;
             bottom: 20px;
@@ -56,102 +57,107 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
+
         #toast.show {
             opacity: 1;
         }
     </style>
 </head>
+
 <body class="min-h-screen gradient-bg text-white">
     <!-- Floating Particles -->
     <div id="particles" class="fixed inset-0 pointer-events-none"></div>
-    
+
     <!-- Main Container -->
     <div class="min-h-screen flex items-center justify-center p-4">
         <div class="w-full max-w-md">
             <!-- Header -->
             <div class="text-center mb-8">
-                <div class="w-20 h-20 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <div
+                    class="w-20 h-20 mx-auto mb-4 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
                     <i class="fas fa-robot text-3xl"></i>
                 </div>
-                <h1 class="text-3xl font-bold mb-2">Gemini AI Chat</h1>
+                <h1 class="text-3xl font-bold mb-2">Buddy AI Chat</h1>
                 <p class="text-white/70">Login or create an account to continue</p>
             </div>
-            
+
             <!-- Form Container -->
             <div class="form-container rounded-2xl p-8 shadow-2xl">
                 <!-- Toggle Between Login/Signup -->
                 <div class="flex mb-8 bg-white/10 rounded-xl p-1">
-                    <div id="loginToggle" class="toggle-option flex-1 text-center font-medium active" onclick="showLogin()">
+                    <div id="loginToggle" class="toggle-option flex-1 text-center font-medium active"
+                        onclick="showLogin()">
                         Login
                     </div>
                     <div id="signupToggle" class="toggle-option flex-1 text-center font-medium" onclick="showSignup()">
                         Sign Up
                     </div>
                 </div>
-                
+
                 <!-- Login Form -->
                 <form id="loginForm" class="space-y-5">
                     <div>
                         <label class="block text-sm font-medium mb-2">Email</label>
                         <input type="email" id="loginEmail" required
-                               class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
+                            class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">Password</label>
                         <input type="password" id="loginPassword" required
-                               class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
+                            class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
                     </div>
-                    <button type="submit" class="w-full bg-white text-purple-600 font-semibold py-3 rounded-lg hover:bg-white/90 transition">
+                    <button type="submit"
+                        class="w-full bg-white text-purple-600 font-semibold py-3 rounded-lg hover:bg-white/90 transition">
                         Login
                     </button>
                 </form>
-                
+
                 <!-- Signup Form -->
                 <form id="signupForm" class="space-y-5 hidden">
                     <div>
                         <label class="block text-sm font-medium mb-2">Full Name</label>
                         <input type="text" id="signupName" required
-                               class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
+                            class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">Email</label>
                         <input type="email" id="signupEmail" required
-                               class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
+                            class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">Password</label>
                         <input type="password" id="signupPassword" required
-                               class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
+                            class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">Confirm Password</label>
                         <input type="password" id="signupConfirmPassword" required
-                               class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
+                            class="form-input w-full p-3 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30">
                     </div>
-                    <button type="submit" class="w-full bg-white text-purple-600 font-semibold py-3 rounded-lg hover:bg-white/90 transition">
+                    <button type="submit"
+                        class="w-full bg-white text-purple-600 font-semibold py-3 rounded-lg hover:bg-white/90 transition">
                         Create Account
                     </button>
                 </form>
-                
+
                 <!-- Status Message -->
                 <div id="statusMessage" class="mt-4 text-center text-sm hidden"></div>
             </div>
-            
+
             <!-- Footer -->
             <div class="text-center mt-6 text-white/50 text-sm">
-                <p>Powered by Gemini AI | Simple Authentication</p>
+                <p>Powered by Buddy AI | Simple Authentication</p>
             </div>
         </div>
     </div>
-    
+
     <!-- Toast Notification -->
     <div id="toast"></div>
-    
+
     <script>
         // Configuration
         const API_BASE = 'https://chatbot-full-stack.onrender.com/api';
-        
+
         // Create particles
         function createParticles() {
             const container = document.getElementById('particles');
@@ -171,7 +177,7 @@
                 container.appendChild(particle);
             }
         }
-        
+
         // Show toast message
         function showToast(message, type = 'info') {
             const toast = document.getElementById('toast');
@@ -180,7 +186,7 @@
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
-        
+
         // Toggle between login/signup
         function showLogin() {
             document.getElementById('loginForm').classList.remove('hidden');
@@ -188,35 +194,35 @@
             document.getElementById('loginToggle').classList.add('active');
             document.getElementById('signupToggle').classList.remove('active');
         }
-        
+
         function showSignup() {
             document.getElementById('loginForm').classList.add('hidden');
             document.getElementById('signupForm').classList.remove('hidden');
             document.getElementById('loginToggle').classList.remove('active');
             document.getElementById('signupToggle').classList.add('active');
         }
-        
+
         // Handle login
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
-            
+
             if (!email || !password) {
                 showToast('Please fill in all fields', 'error');
                 return;
             }
-            
+
             try {
                 const response = await fetch(`${API_BASE}/auth/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     showToast('Login successful!', 'success');
                     // Store user info in localStorage
@@ -233,40 +239,40 @@
                 showToast('Network error. Please try again.', 'error');
             }
         });
-        
+
         // Handle signup
         document.getElementById('signupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const name = document.getElementById('signupName').value;
             const email = document.getElementById('signupEmail').value;
             const password = document.getElementById('signupPassword').value;
             const confirmPassword = document.getElementById('signupConfirmPassword').value;
-            
+
             if (!name || !email || !password || !confirmPassword) {
                 showToast('Please fill in all fields', 'error');
                 return;
             }
-            
+
             if (password !== confirmPassword) {
                 showToast('Passwords do not match', 'error');
                 return;
             }
-            
+
             if (password.length < 6) {
                 showToast('Password must be at least 6 characters', 'error');
                 return;
             }
-            
+
             try {
                 const response = await fetch(`${API_BASE}/auth/signup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ name, email, password })
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     showToast('Account created successfully!', 'success');
                     // Auto-login after signup
@@ -283,17 +289,13 @@
                 showToast('Network error. Please try again.', 'error');
             }
         });
-        
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
-            
-            // Check if user is already logged in
-            const user = localStorage.getItem('user');
-            if (user) {
-                window.location.href = 'chat.html';
-            }
         });
+
     </script>
 </body>
+
 </html>
