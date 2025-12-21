@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const chatRoutes = require('./routes/chat');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/api/auth', authRoutes);
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -58,6 +60,10 @@ app.get('/', (req, res) => {
     version: '1.0.0',
     status: 'operational',
     endpoints: {
+      auth: {
+        signup: 'POST /api/auth/signup',
+        login: 'POST /api/auth/login'
+      },
       chat: 'POST /api/chat',
       sessions: 'GET /api/chat/sessions',
       history: 'GET /api/chat/history/:sessionId',
