@@ -2,7 +2,7 @@
 // INITIALIZATION
 // ============================
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('🚀 Gemini Chat with Voice Search Initializing...');
+    console.log('🚀 Buddy Chat with Voice Search Initializing...');
 
     // Initialize sidebar
     initSidebar();
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // In your existing init.js, add this at the beginning of the DOMContentLoaded event:
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('🚀 Gemini Chat with Voice Search Initializing...');
+    console.log('🚀 Buddy Chat with Voice Search Initializing...');
 
     // Initialize dynamic styles
     if (typeof initDynamicStyles === 'function') {

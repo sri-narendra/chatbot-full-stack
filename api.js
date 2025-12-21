@@ -43,7 +43,7 @@ async function checkApiStatus() {
                 apiStatusEl.textContent = `${data.availableKeys} API keys active`;
                 apiStatusEl.className = 'text-xs text-green-400';
                 apiStatus = 'working';
-                welcomeMsg.textContent = `Using ${data.availableKeys} active Gemini API keys`;
+                welcomeMsg.textContent = `Using ${data.availableKeys} active Buddy API keys`;
             } else if (data.quotaExceededKeys > 0) {
                 apiStatusEl.textContent = 'All keys quota exceeded';
                 apiStatusEl.className = 'text-xs text-red-400';

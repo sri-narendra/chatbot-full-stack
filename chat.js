@@ -102,17 +102,17 @@ function newChat() {
             <div class="text-center text-gray-400 py-10">
                 <div class="text-4xl mb-4">🤖</div>
                 <h2 class="text-2xl font-semibold mb-2">How can I help you today?</h2>
-                <p class="text-gray-500" id="welcomeMessage">Multiple Gemini API keys active</p>
+                <p class="text-gray-500" id="welcomeMessage">Multiple Buddy API keys active</p>
             </div>
         </div>
     `;
 
     if (apiStatus === 'working') {
-        addMessage('assistant', 'Hello! I\'m using multiple Gemini API keys for reliability. How can I help you today?');
+        addMessage('assistant', 'Hello! I\'m using multiple Buddy API keys for reliability. How can I help you today?');
     } else if (apiStatus === 'quota_exceeded') {
-        addMessage('assistant', '⚠️ All Gemini API keys have exceeded their quota. Please try again later or add more API keys.', 'error');
+        addMessage('assistant', '⚠️ All Buddy API keys have exceeded their quota. Please try again later or add more API keys.', 'error');
     } else {
-        addMessage('assistant', '⚠️ Gemini API is currently unavailable. Please try again later.', 'error');
+        addMessage('assistant', '⚠️ Buddy API is currently unavailable. Please try again later.', 'error');
     }
 
     loadSessions();
@@ -163,7 +163,7 @@ async function sendMessage() {
         }
 
         const data = await response.json();
-        const messageType = data.source === 'gemini' ? 'normal' : 'error';
+        const messageType = data.source === 'Buddy' ? 'normal' : 'error';
 
         // Add assistant response
         addMessage('assistant', data.reply, messageType);

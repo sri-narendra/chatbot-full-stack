@@ -118,7 +118,7 @@ function setupMessageAnimations() {
                     <div class="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
                     <div class="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
                 </div>
-                <span class="text-gray-400 text-sm">Gemini is thinking...</span>
+                <span class="text-gray-400 text-sm">Buddy is thinking...</span>
             </div>
         `;
         chatBox.appendChild(typingIndicator);
@@ -419,6 +419,6 @@ function showEnhancedToast(message, type = 'info') {
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         initDynamicStyles();
-        showEnhancedToast('Welcome to Gemini AI Chat!', 'info');
+        showEnhancedToast('Welcome to Buddy AI Chat!', 'info');
     }, 1000);
 });
