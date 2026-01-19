@@ -1,0 +1,58 @@
+[
+    {
+        "title": "CS Student Dungeon",
+        "description": "An interactive browser project for computer science students featuring JS-driven animations and responsive design, serving as a small game or UI demo.",
+        "tech": ["HTML", "CSS", "JavaScript"],
+        "link": "https://sri-narendra.github.io/CS-Student-Dungeon/",
+        "icon": "fas fa-dragon"
+    },
+    {
+        "title": "Currency Converter",
+        "description": "A live currency conversion tool using JavaScript and API integration, providing instant conversion between multiple currencies with a responsive interface.",
+        "tech": ["HTML", "CSS", "JavaScript"],
+        "link": "https://sri-narendra.github.io/currency-converter/",
+        "icon": "fas fa-money-bill-wave"
+    },
+    {
+        "title": "Clock And Stopwatch",
+        "description": "An interactive digital clock and stopwatch using JS timing functions, demonstrating precise timing, DOM updates, and event handling.",
+        "tech": ["HTML", "CSS", "JavaScript"],
+        "link": "https://sri-narendra.github.io/Clock-And-Stopwatch/",
+        "icon": "fas fa-clock"
+    },
+    {
+        "title": "TV Channels Directory",
+        "description": "A curated web page listing TV channels with responsive layout and possibly embedded streams, showcasing structured content and frontend skills.",
+        "tech": ["HTML", "CSS", "JavaScript","Nodejs"],
+        "link": "https://sri-narendra.github.io/TvChannels/",
+        "icon": "fas fa-tv"
+    },
+    {
+        "title": "Gravity Club Portal",
+        "description": "Official website of Gravity Club at LPU, highlighting podcasts, events, blogs, and social initiatives with engaging UI and responsive design.",
+        "tech": ["HTML", "CSS", "JavaScript"],
+        "link": "http://gravityorg.xyz/",
+        "icon": "fas fa-users"
+    },
+    {
+        "title": "Digital Student Care Network",
+        "description": "A student resource network providing academic and social support through an interactive frontend interface built with HTML, CSS, and JS.",
+        "tech": ["HTML", "CSS", "JavaScript","Python"],
+        "link": "https://sri-narendra.github.io/Digital-Student-Care-Network/",
+        "icon": "fas fa-network-wired"
+    },
+    {
+        "title": "Full‑Stack Chatbot Demo",
+        "description": "A full-stack chatbot demonstrating real-time interaction between frontend and backend logic, showcasing API communication and state management.",
+        "tech": ["HTML", "CSS", "JavaScript", "Nodejs"],
+        "link": "https://sri-narendra.github.io/chatbot-full-stack/",
+        "icon": "fas fa-robot"
+    },
+    {
+        "title": "QR Code Generator",
+        "description": "A web tool that generates downloadable QR codes from user input using JavaScript, demonstrating DOM interaction and dynamic content generation.",
+        "tech": ["HTML", "CSS", "JavaScript","Nodejs"],
+        "link": "https://sri-narendra.github.io/qr-code/",
+        "icon": "fas fa-qrcode"
+    }
+]
